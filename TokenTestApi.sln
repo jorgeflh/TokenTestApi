@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29424.173
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TokenTestApi", "TokenTestApi\TokenTestApi.csproj", "{BED673C0-EC89-4194-9DF7-FB226C7E2A2E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{074C5CFB-F7BE-4E0C-9F3A-5D71BCF9A6A5} = {074C5CFB-F7BE-4E0C-9F3A-5D71BCF9A6A5}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TokenTestApi.Core", "TokenTestApi.Core\TokenTestApi.Core.csproj", "{074C5CFB-F7BE-4E0C-9F3A-5D71BCF9A6A5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BED673C0-EC89-4194-9DF7-FB226C7E2A2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BED673C0-EC89-4194-9DF7-FB226C7E2A2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BED673C0-EC89-4194-9DF7-FB226C7E2A2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BED673C0-EC89-4194-9DF7-FB226C7E2A2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{074C5CFB-F7BE-4E0C-9F3A-5D71BCF9A6A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{074C5CFB-F7BE-4E0C-9F3A-5D71BCF9A6A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{074C5CFB-F7BE-4E0C-9F3A-5D71BCF9A6A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{074C5CFB-F7BE-4E0C-9F3A-5D71BCF9A6A5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CA592D71-1740-49A7-8A66-4436F47BD3B7}
+	EndGlobalSection
+EndGlobal
