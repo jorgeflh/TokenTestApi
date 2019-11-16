@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,6 +20,18 @@ namespace TokenTestApi.Core.Infrastructure.Repository
             this.tokenTestApiContext = this.scope.ServiceProvider.GetRequiredService<TokenTestApiContext>();
         }
 
+        public async Task<Customer> GetById(int id)
+        {
+            var customer = await tokenTestApiContext.Customer.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (customer == null)
+            {
+                return null;
+            }
+
+            return customer;
+        }
+
         public async Task<bool> Create(Customer customer)
         {
             var success = false;
@@ -31,15 +44,6 @@ namespace TokenTestApi.Core.Infrastructure.Repository
                 success = true;
 
             return success;
-        }
-
-        public Customer GetById(int id)
-        {
-            var result = tokenTestApiContext.Customer
-                                .Where(x => x.Id == id)
-                                .FirstOrDefault();
-
-            return result;
         }
     }
 }
