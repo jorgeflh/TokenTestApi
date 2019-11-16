@@ -6,9 +6,9 @@ namespace TokenTestApi.Core.Domain.Models
 {
     public class Customer
     {
-        public DateTime RegistrationDate { get; set; }
-        public long CardNumber { get; set; }
+        public int Id { get; set; }
+        public ulong CardNumber { get; set; }
         public int Cvv { get; set; }
-        public long Token { get; set; }
+        public DateTime RegistrationDateTimeInUtc { get; set; }
     }
 }
