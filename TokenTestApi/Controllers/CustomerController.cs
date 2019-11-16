@@ -37,7 +37,7 @@ namespace TokenTestApi.Controllers
         {
             var result = await customerService.Create(customer);
 
-            return CreatedAtAction(nameof())
+            return CreatedAtAction(nameof(GetById), new { id = result.Id }, result);
         }
     }
 }
