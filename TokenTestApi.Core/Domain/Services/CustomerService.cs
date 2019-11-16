@@ -15,6 +15,13 @@ namespace TokenTestApi.Core.Domain.Services
             this.customerRepository = customerRepository;
         }
 
+        public async Task<Customer> GetById(int id)
+        {
+            var customer = await customerRepository.GetById(id);
+
+            return customer;
+        }
+
         public async Task<Customer> Create(Customer customer)
         {
             customer.RegistrationDateTimeInUtc = DateTime.UtcNow;
@@ -26,13 +33,5 @@ namespace TokenTestApi.Core.Domain.Services
             else
                 return null;
         }
-
-        public Customer Get(int id)
-        {
-            var result =  customerRepository.GetById(id);
-
-            return result;
-        }
-
     }
 }
