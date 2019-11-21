@@ -6,6 +6,5 @@ namespace TokenTestApi.Core.Domain.Interfaces.Repository
     public interface ICustomerRepository
     {
         Task<bool> Create(Customer customer);
-        Task<Customer> GetById(int id);
     }
 }
