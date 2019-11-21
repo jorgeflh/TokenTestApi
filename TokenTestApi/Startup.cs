@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using TokenTestApi.Core.Domain.Interfaces.Repository;
-using TokenTestApi.Core.Domain.Interfaces.Services;
+using TokenTestApi.Core.Domain.Interfaces.Service;
 using TokenTestApi.Core.Domain.Services;
 using TokenTestApi.Core.Infrastructure.Data;
 using TokenTestApi.Core.Infrastructure.Repository;
@@ -30,7 +30,9 @@ namespace TokenTestApi
                 options.UseInMemoryDatabase(databaseName));
 
             services.AddTransient<ICustomerService, CustomerService>();
+            services.AddTransient<ITokenService, TokenService>();
             services.AddSingleton<ICustomerRepository, CustomerRepository>();
+            services.AddSingleton<ITokenRepository, TokenRepository>();
             services.AddControllers().AddNewtonsoftJson();
         }
 
