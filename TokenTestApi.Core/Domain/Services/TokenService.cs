@@ -25,7 +25,8 @@ namespace TokenTestApi.Core.Domain.Services
             {
                 var tokenString = customer.CardNumber + DateTime.UtcNow.ToString("yyyyMMddHHmm");
                 var tokenArrayInt = tokenString.Select(c => int.Parse(c.ToString())).ToArray();
-                var rawToken = ArrayHelpers.GetNumbersBasedOnAbsoluteDifference(tokenArrayInt);
+                var rawToken = ArrayHelpers.GetFromAbsoluteDiff(tokenArrayInt);
+                rawToken = ArrayHelpers.RightRotate(rawToken, customer.Cvv);
 
                 tokenString = "";
                 foreach (var item in rawToken)
