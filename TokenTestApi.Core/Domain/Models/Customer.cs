@@ -10,5 +10,6 @@ namespace TokenTestApi.Core.Domain.Models
         public ulong CardNumber { get; set; }
         public int Cvv { get; set; }
         public DateTime RegistrationDateTimeInUtc { get; set; }
+        public virtual Token Token { get; set; }
     }
 }

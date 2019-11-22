@@ -33,5 +33,12 @@ namespace TokenTestApi.Core.Infrastructure.Repository
 
             return success;
         }
+
+        public async Task<Customer> GetCustomerByRegistrationDate(DateTime registrationDate)
+        {
+            var customer = await tokenTestApiContext.Customer.FirstOrDefaultAsync(x => x.RegistrationDateTimeInUtc == registrationDate);
+            customer.Token = await tokenTestApiContext.Token.FirstOrDefaultAsync(x => x.CustomerId == customer.Id);
+            return customer;
+        }
     }
 }

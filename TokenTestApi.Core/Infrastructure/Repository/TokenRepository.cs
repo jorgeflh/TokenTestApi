@@ -30,5 +30,15 @@ namespace TokenTestApi.Core.Infrastructure.Repository
 
             return null;
         }
+
+        public async Task<Token> GetToken(string token)
+        {
+            var tokenInDb = await tokenTestApiContext.Token.FirstOrDefaultAsync(x => x.Value.Equals(token));
+
+            if (tokenInDb == null)
+                return null;
+
+            return tokenInDb;
+        }
     }
 }

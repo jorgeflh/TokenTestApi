@@ -9,5 +9,6 @@ namespace TokenTestApi.Core.Domain.Interfaces.Repository
     public interface ITokenRepository
     {
         Task<Token> Create(Token token);
+        Task<Token> GetToken(string token);
     }
 }

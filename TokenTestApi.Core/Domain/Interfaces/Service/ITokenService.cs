@@ -6,5 +6,6 @@ namespace TokenTestApi.Core.Domain.Interfaces.Service
     public interface ITokenService
     {
         Task<Token> Create(Customer customer);
+        Task<bool> ValidateToken(ValidateToken validateToken);
     }
 }

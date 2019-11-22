@@ -13,10 +13,12 @@ namespace TokenTestApi.Core.Domain.Services
     public class TokenService : ITokenService
     {
         private readonly ITokenRepository tokenRepository;
+        private readonly ICustomerRepository customerRepository;
 
-        public TokenService(ITokenRepository tokenRepository)
+        public TokenService(ITokenRepository tokenRepository, ICustomerRepository customerRepository)
         {
             this.tokenRepository = tokenRepository;
+            this.customerRepository = customerRepository;
         }
 
         public async Task<Token> Create(Customer customer)
@@ -51,6 +53,17 @@ namespace TokenTestApi.Core.Domain.Services
             {
                 throw new Exception(ex.Message);
             }
+        }
+
+        public async Task<bool> ValidateToken(ValidateToken validateToken)
+        {
+            var customer = await customerRepository.GetCustomerByRegistrationDate(validateToken.RegistrationDate);
+
+            TimeSpan ts = DateTime.UtcNow - customer.RegistrationDateTimeInUtc;
+            if (ts.TotalMinutes > 15)
+                return false;
+
+            return true;
         }
     }
 }
