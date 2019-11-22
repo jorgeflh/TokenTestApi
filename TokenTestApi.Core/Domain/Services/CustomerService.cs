@@ -19,24 +19,31 @@ namespace TokenTestApi.Core.Domain.Services
 
         public async Task<CustomerToken> Create(Customer customer)
         {
-            customer.RegistrationDateTimeInUtc = DateTime.UtcNow;
-
-            var success = await customerRepository.Create(customer);
-
-            if (success)
+            try
             {
-                var token = await tokenService.Create(customer);
+                customer.RegistrationDateTimeInUtc = DateTime.UtcNow;
 
-                CustomerToken customerToken = new CustomerToken
+                var success = await customerRepository.Create(customer);
+
+                if (success)
                 {
-                    RegistrationDate = customer.RegistrationDateTimeInUtc,
-                    Token = token.Value
-                };
+                    var token = await tokenService.Create(customer);
 
-                return customerToken;
+                    CustomerToken customerToken = new CustomerToken
+                    {
+                        RegistrationDate = customer.RegistrationDateTimeInUtc,
+                        Token = token.Value
+                    };
+
+                    return customerToken;
+                }
+
+                return null;
             }
-
-            return null;
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

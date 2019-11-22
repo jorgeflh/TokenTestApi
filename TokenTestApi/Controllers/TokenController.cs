@@ -19,17 +19,30 @@ namespace TokenTestApi.Controllers
         }
         
         [HttpPost("create")]
-        public async Task<CustomerToken> Create([FromBody]Customer customer)
+        public async Task<IActionResult> Create([FromBody]Customer customer)
         {
+            if (customer.CardNumber.ToString().Length != 16)
+                return BadRequest("Card number lenght error");
+
+            if (customer.Cvv.ToString().Length > 5)
+                return BadRequest("Cvv lenght error");
+
             var result = await customerService.Create(customer);
-            return result;
+
+            if (result == null)
+                return BadRequest();
+
+            return Ok(result);
         }
 
         [HttpPost("validatetoken")]
-        public async Task<bool> ValidateToken([FromBody]ValidateToken validateToken)
+        public async Task<IActionResult> ValidateToken([FromBody]ValidateToken validateToken)
         {
+            if (validateToken.Cvv.ToString().Length > 5)
+                return BadRequest("Cvv lenght error");
+
             var result = await tokenService.ValidateToken(validateToken);
-            return result;
+            return Ok(result);
         }
     }
 }
