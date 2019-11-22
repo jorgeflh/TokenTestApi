@@ -9,6 +9,8 @@ using TokenTestApi.Core.Domain.Interfaces.Service;
 using TokenTestApi.Core.Domain.Services;
 using TokenTestApi.Core.Infrastructure.Data;
 using TokenTestApi.Core.Infrastructure.Repository;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.OpenApi.Models;
 
 namespace TokenTestApi
 {
@@ -24,6 +26,11 @@ namespace TokenTestApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "TokenTest Api", Version = "v1" });
+            });
+
             var databaseName = Configuration["EntityFramework:DatabaseName"];
 
             services.AddDbContext<TokenTestApiContext>(options =>
@@ -33,6 +40,7 @@ namespace TokenTestApi
             services.AddTransient<ITokenService, TokenService>();
             services.AddSingleton<ICustomerRepository, CustomerRepository>();
             services.AddSingleton<ITokenRepository, TokenRepository>();
+
             services.AddControllers().AddNewtonsoftJson();
         }
 
@@ -43,7 +51,7 @@ namespace TokenTestApi
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            
             app.UseRouting();
 
             app.UseAuthorization();
@@ -51,6 +59,12 @@ namespace TokenTestApi
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "TokenTest Api V1");
             });
         }
     }
